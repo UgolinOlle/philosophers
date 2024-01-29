@@ -30,15 +30,23 @@ typedef struct s_data {
   time_t tt_sleep;
   pthread_mutex_t *fork_locked;
   unsigned int n_philo;
+  unsigned int t_ate;
+  unsigned int t_last_ate;
+  unsigned int fork[2];
 } t_data;
 
 typedef struct s_philo {
   pthread_t thread;
   unsigned int id;
-  unsigned int t_ate;
-  unsigned int t_last_ate;
-  unsigned int fork[2];
   t_data *data;
 } t_philo;
+
+// -- Prototypes
+
+// -- Error handling
+void ft_free(t_philo *philo);
+void ft_destroy_mutex(t_philo *philo);
+void ft_exit(t_philo *philo, char *msg);
+void ft_exit(t_philo *philo, char *msg);
 
 #endif
