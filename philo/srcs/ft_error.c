@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uolle <uolle@student.42bangkok.com>        +#+  +:+       +#+        */
+/*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:57:10 by uolle             #+#    #+#             */
-/*   Updated: 2024/01/29 17:01:30 by uolle            ###   ########.fr       */
+/*   Updated: 2024/02/12 15:20:18 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,26 @@
  * @param *philo t_philo - Pointer to the philo struct.
  * @return void
  */
-void ft_free(t_philo *philo) {
-  unsigned int i;
+void	*ft_free(t_global *global)
+{
+	unsigned int	i;
 
-  if (!philo->data)
-    return;
-  if (philo->data->fork_locked)
-    free(philo->data->fork_locked);
-  if (philo) {
-    free(philo);
-  }
-  return;
+	if (!global)
+		return ;
+	if (global->fork_locked != NULL)
+		free(global->fork_locked);
+	if (global->philos != NULL)
+	{
+		i = 0;
+		while (i < global->n_philo)
+		{
+			if (global->philos[i] != NULL)
+				free(global->philos[i]);
+			i++;
+		}
+		free(global->philos);
+	}
+	return ;
 }
 
 /**
@@ -37,26 +46,29 @@ void ft_free(t_philo *philo) {
  * @param *philo t_philo - Pointer to the philo struct.
  * @return void
  */
-void ft_destroy_mutex(t_philo *philo) {
-  unsigned int i;
+void	ft_destroy_mutex(t_global *global)
+{
+	unsigned int	i;
 
-  i = 0;
-  while (i < philo->data->n_philo) {
-    pthread_mutex_destroy(&philo->data->fork_locked[i]);
-    i++;
-  }
-  return;
+	i = 0;
+	while (i < global->n_philo)
+	{
+		pthread_mutex_destroy(&global->fork_locked[i]);
+		i++;
+	}
+	return ;
 }
 
 /**
  * @brief Exit the program with a message.
  *
  * @param *philo t_philo - Pointer to the philo struct.
- * @param *msg char - Message to print.
+ * @param *content char - Message to print.
  * @return void
  */
-void ft_exit(t_philo *philo, char *msg) {
-  ft_free(philo);
-  printf("%s\n", msg);
-  exit(1);
+void	ft_exit(t_global *global, char *content)
+{
+	ft_free(global);
+	printf("%s\n", content);
+	exit(1);
 }
