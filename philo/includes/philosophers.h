@@ -5,66 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 14:37:47 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/12 15:31:30 by ugolin-olle      ###   ########.fr       */
+/*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
+/*   Updated: 2024/02/16 10:26:45 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_P
-# define PHILO_P
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
-// ------------------------------------------------- //
-// -- Libs                                           //
-// ------------------------------------------------- //
+// -- Libraries
 # include <limits.h>
 # include <pthread.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
 
-// ------------------------------------------------- //
-// -- Variable                                       //
-// ------------------------------------------------- //
-# define PHILO_NAME "philo:"
-# define PHILO_USAGE \
-	"%s usage: ./philo <number_of_philosophers> \
-<time_to_die> <time_to_eat> <time_to_sleep> \
-[number_of_times_each_philosopher_must_eat]\n"
+// -- Defines
+# define PHILO_USAGE "Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]"
+# define PHILO_INPUT_ERROR "Invalid input"
 
-// ------------------------------------------------- //
-// -- Structures                                     //
-// ------------------------------------------------- //
+// -- Structures
 typedef struct s_philo
 {
-	time_t			s_time;
-	time_t			tt_die;
-	time_t			tt_eat;
-	time_t			tt_sleep;
-	unsigned int	t_ate;
-	unsigned int	t_last_ate;
+	int				id;
+	int				t_ate;
+	int				fork[2];
+	struct s_global	*global;
 }					t_philo;
 
 typedef struct s_global
 {
-	pthread_t		thread;
-	unsigned int	id;
-	unsigned int	n_philo;
-	pthread_mutex_t	*fork_locked;
-	t_philo			**philos;
+	int				n_philo;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				n_must_eat;
+	int				*forks;
+	pthread_mutex_t	*forks_mutex;
+	pthread_mutex_t	print_mutex;
 }					t_global;
 
-// ------------------------------------------------- //
-// -- Prototypes                                     //
-// ------------------------------------------------- //
+// -- Error
+void				ft_error(char *msg, int status);
 
-// -- Error handling
-void				*ft_free(t_global *global);
-void				ft_destroy_mutex(t_global *global);
-void				ft_exit(t_global *global, char *content);
+// -- Init
+t_global			*ft_init_global(int argc, char **argv);
 
 // -- Utils
-int					ft_write(char *content, int code);
+int					ft_is_digit(char *c);
+int					ft_atoi(const char *str);
+void				ft_print_global(t_global *global);
 
 #endif
