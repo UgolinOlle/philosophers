@@ -6,11 +6,35 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/16 10:23:53 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/16 13:54:39 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+/**
+ * @brief Initialize forks
+ *
+ * @param t_global *global - Pointer to the global struct.
+ * @return void
+ */
+static pthread_mutex_t	*ft_init_forks(t_global *global)
+{
+	pthread_mutex_t	*forks;
+	int				i;
+
+	forks = malloc(sizeof(pthread_mutex_t) * global->n_philo);
+	if (!forks)
+		ft_exit(PHILO_MALLOC_ERROR, EXIT_FAILURE);
+	i = 0;
+	while (i < global->n_philo)
+	{
+		if (pthread_mutex_init(&forks[i], NULL))
+			ft_exit(PHILO_MUTEX_ERROR, EXIT_FAILURE);
+		i++;
+	}
+	return (forks);
+}
 
 /**
  * @brief Initialize forks to philosophers
@@ -18,7 +42,7 @@
  * @param t_philo *philos - Pointer to the philos struct.
  * @return void
  */
-static void	ft_init_forks(t_philo *philo)
+static void	ft_give_forks(t_philo *philo)
 {
 	philo->fork[0] = philo->id;
 	philo->fork[1] = (philo->id + 1) % philo->global->n_philo;
@@ -51,7 +75,8 @@ static t_philo	**ft_init_philos(t_global *global)
 			ft_exit("An error occured, philo malloc failed.", EXIT_FAILURE);
 		philos[i]->id = i;
 		philos[i]->t_ate = 0;
-		ft_init_forks(philos[i]);
+		philos[i]->global = global;
+		ft_give_forks(philos[i]);
 		i++;
 	}
 	return (philos);
@@ -74,10 +99,19 @@ t_global	*ft_init_global(int argc, char **argv)
 	if (!global)
 		ft_exit("An error occured, global malloc failed.", EXIT_FAILURE);
 	i = 1;
+	global->n_philo = ft_atoi(argv[i++]);
 	global->tt_die = ft_atoi(argv[i++]);
 	global->tt_eat = ft_atoi(argv[i++]);
 	global->tt_sleep = ft_atoi(argv[i++]);
-	global->n_philo = ft_atoi(argv[i++]);
+	if (argc == 6)
+		global->n_must_eat = ft_atoi(argv[i]);
+	else
+		global->n_must_eat = -1;
 	global->philos = ft_init_philos(global);
+	if (!global->philos)
+		return (NULL);
+	global->forks_locked = ft_init_forks(global);
+	if (!global->forks_locked)
+		return (NULL);
 	return (global);
 }
