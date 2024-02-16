@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: uolle <uolle@student.42bangkok.com>        +#+  +:+       +#+         #
+#    By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/28 23:23:14 by uolle             #+#    #+#              #
-#    Updated: 2024/01/29 17:02:24 by uolle            ###   ########.fr        #
+#    Updated: 2024/02/16 10:33:55 by ugolin-olle      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # -- Variables
-HDRDIR       = philo/includes
-SRCSDIR      = philo/srcs
+HDRDIR       = includes
+SRCSDIR      = srcs
 OBJDIR       = objs
 
 SRC_FILES = $(wildcard $(SRCSDIR)/*.c)
