@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/16 10:54:34 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/16 13:59:56 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,21 +91,14 @@ void	ft_print_global(t_global *global)
 }
 
 /**
- * @brief Print main arguments.
+ * @brief Get time in milliseconds.
  *
- * @param argc int - Number of arguments.
- * @param argv char ** - Arguments.
- * @return void
+ * @return time_t
  */
-void	ft_print_args(int argc, char **argv)
+time_t	ft_get_time(void)
 {
-	int	i;
+	struct timeval	tv;
 
-	i = 0;
-	printf("argc: %d\n", argc);
-	while (i < argc)
-	{
-		printf("argv[%d]: %s\n", i, argv[i]);
-		i++;
-	}
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
