@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:18 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/16 10:24:48 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/16 10:36:21 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
  * @param msg char * - Error message.
  * @param status int - Exit status.
  * @return void
-*/
-void    ft_error(char *msg, int status)
+ */
+void	ft_exit(char *msg, int status)
 {
-    printf("Error: %s\n", msg);
-    exit(status);
+	printf("Error: %s\n", msg);
+	exit(status);
 }
