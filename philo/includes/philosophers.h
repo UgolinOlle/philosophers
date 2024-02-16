@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/16 10:26:45 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/16 10:54:51 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@
 // -- Defines
 # define PHILO_USAGE "Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]"
 # define PHILO_INPUT_ERROR "Invalid input"
+# define PHILO_MALLOC_ERROR "An error occured, malloc failed."
 
 // -- Structures
 typedef struct s_philo
 {
+	pthread_t		thread;
 	int				id;
 	int				t_ate;
+	int				ate_count;
 	int				fork[2];
 	struct s_global	*global;
 }					t_philo;
@@ -37,17 +40,17 @@ typedef struct s_philo
 typedef struct s_global
 {
 	int				n_philo;
-	int				t_die;
-	int				t_eat;
-	int				t_sleep;
+	time_t			t_start;
+	time_t			tt_die;
+	time_t			tt_eat;
+	time_t			tt_sleep;
 	int				n_must_eat;
-	int				*forks;
-	pthread_mutex_t	*forks_mutex;
-	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	*forks_locked;
+	t_philo			**philos;
 }					t_global;
 
 // -- Error
-void				ft_error(char *msg, int status);
+void				ft_exit(char *msg, int status);
 
 // -- Init
 t_global			*ft_init_global(int argc, char **argv);
@@ -56,5 +59,6 @@ t_global			*ft_init_global(int argc, char **argv);
 int					ft_is_digit(char *c);
 int					ft_atoi(const char *str);
 void				ft_print_global(t_global *global);
+void				ft_print_args(int argc, char **argv);
 
 #endif
