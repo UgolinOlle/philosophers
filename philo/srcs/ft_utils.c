@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/16 10:23:57 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/16 10:54:34 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	ft_print_global(t_global *global)
 	printf("tt_die: %ld\n", global->tt_die);
 	printf("tt_eat: %ld\n", global->tt_eat);
 	printf("tt_sleep: %ld\n", global->tt_sleep);
-	printf("t_last_ate: %d\n", global->t_last_ate);
 	printf("n_philo: %d\n", global->n_philo);
 	while (i < global->n_philo)
 	{
@@ -87,6 +86,26 @@ void	ft_print_global(t_global *global)
 		printf("philo[%d]->fork[1]: %d\n", i, global->philos[i]->fork[1]);
 		printf("philo[%d]->ate_count: %d\n", i, global->philos[i]->ate_count);
 		printf("philo[%d]->t_ate: %d\n", i, global->philos[i]->t_ate);
+		i++;
+	}
+}
+
+/**
+ * @brief Print main arguments.
+ *
+ * @param argc int - Number of arguments.
+ * @param argv char ** - Arguments.
+ * @return void
+ */
+void	ft_print_args(int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	printf("argc: %d\n", argc);
+	while (i < argc)
+	{
+		printf("argv[%d]: %s\n", i, argv[i]);
 		i++;
 	}
 }
