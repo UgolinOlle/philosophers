@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:18 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 19:04:19 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 19:20:50 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	ft_exit(char *msg, int status)
  */
 void	*ft_clean_global(t_global *global)
 {
-	unsigned int	i;
+	int	i;
 
 	if (!global)
-		return ;
+		return (NULL);
 	if (global->forks_mutex != NULL)
 		free(global->forks_mutex);
 	if (global->philos != NULL)
@@ -51,6 +51,7 @@ void	*ft_clean_global(t_global *global)
 		free(global->philos);
 	}
 	free(global);
+	return (NULL);
 }
 
 /**
