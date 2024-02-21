@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 18:25:20 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 19:07:49 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ typedef struct s_global
 	t_philo			**philos;
 }					t_global;
 
-// -- Error
+// -- Cleaner
 void				ft_exit(char *msg, int status);
+void				*ft_clean_global(t_global *global);
+void				ft_clean_mutex(t_global *global);
 
 // -- Init
 t_global			*ft_init_global(int argc, char **argv);
