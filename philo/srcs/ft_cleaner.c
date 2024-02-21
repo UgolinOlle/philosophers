@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:18 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 20:47:13 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 21:26:51 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 /**
  * @brief Print error message and exit the program.
  *
+ * @param t_global *global - Global structure.
  * @param msg char * - Error message.
  * @param status int - Exit status.
  * @return void
  */
-void	ft_exit(char *msg, int status)
+void	ft_exit(t_global *global, char *msg, int status)
 {
+	if (global)
+		ft_clean_global(global);
 	printf("Error: %s\n", msg);
 	exit(status);
 }
