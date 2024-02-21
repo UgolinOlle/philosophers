@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 19:10:58 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 21:22:51 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ time_t	ft_get_time(void)
 void	ft_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->global->write_mutex);
-	printf("%ldms %d %s\n", ft_get_time() - philo->global->t_start, philo->id,
+	printf("%ldms %d %s\n", ft_get_time() - philo->global->t_start, philo->id + 1,
 		status);
 	pthread_mutex_unlock(&philo->global->write_mutex);
 }
