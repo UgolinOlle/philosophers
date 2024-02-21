@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/21 18:32:02 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 20:47:45 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	ft_init_mutex(t_global *global)
  */
 static void	ft_init_philos(t_global *global)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	global->philos = malloc(sizeof(t_philo *) * global->nb_philo);
