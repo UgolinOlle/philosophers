@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 18:53:41 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 19:10:58 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,19 @@ time_t	ft_get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+/**
+ * @brief Print philisophers status
+ *
+ * @param philo t_philo * - Philosopher structure.
+ * @param status char * - Status.
+ * @return void
+ */
+void	ft_status(t_philo *philo, char *status)
+{
+	pthread_mutex_lock(&philo->global->write_mutex);
+	printf("%ldms %d %s\n", ft_get_time() - philo->global->t_start, philo->id,
+		status);
+	pthread_mutex_unlock(&philo->global->write_mutex);
 }
