@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/16 13:59:56 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 18:53:41 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,6 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (nb * neg);
-}
-
-/**
- * @brief Print all data from the global struct.
- *
- * @param global t_global - Pointer to the global struct.
- * @return void
- */
-void	ft_print_global(t_global *global)
-{
-	int	i;
-
-	i = 0;
-	printf("t_start: %ld\n", global->t_start);
-	printf("tt_die: %ld\n", global->tt_die);
-	printf("tt_eat: %ld\n", global->tt_eat);
-	printf("tt_sleep: %ld\n", global->tt_sleep);
-	printf("n_philo: %d\n", global->n_philo);
-	while (i < global->n_philo)
-	{
-		printf("philo[%d]: %d\n", i, global->philos[i]->id);
-		printf("philo[%d]->fork[0]: %d\n", i, global->philos[i]->fork[0]);
-		printf("philo[%d]->fork[1]: %d\n", i, global->philos[i]->fork[1]);
-		printf("philo[%d]->ate_count: %d\n", i, global->philos[i]->ate_count);
-		printf("philo[%d]->t_ate: %d\n", i, global->philos[i]->t_ate);
-		i++;
-	}
 }
 
 /**
