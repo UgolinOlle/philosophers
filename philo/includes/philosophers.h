@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 19:11:26 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 19:16:34 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void				ft_clean_mutex(t_global *global);
 
 // -- Init
 t_global			*ft_init_global(int argc, char **argv);
+
+// -- Rountines
+void				ft_alone(t_global *global);
+void				ft_alone_stop(t_global *global);
 
 // -- Utils
 int					ft_is_digit(char *c);
