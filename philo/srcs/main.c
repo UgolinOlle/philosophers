@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:37:38 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/16 10:23:59 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 21:29:00 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ static void	ft_checker(int argc, char **argv)
 	int	tmp;
 
 	if (argc - 1 < 4 || argc - 1 > 5)
-		ft_error(PHILO_USAGE, EXIT_FAILURE);
-	i = 0;
-	while (++i < argc)
+		ft_exit(NULL, PHILO_USAGE, EXIT_FAILURE);
+	i = 1;
+	while (i <= argc - 1)
 	{
 		if (!ft_is_digit(argv[i]))
-			ft_error(PHILO_INPUT_ERROR, EXIT_FAILURE);
+			ft_exit(NULL, PHILO_INPUT_ERROR, EXIT_FAILURE);
 		tmp = ft_atoi(argv[i]);
 		if (i == 1 && (tmp <= 0 || tmp > 250))
-			ft_error(PHILO_INPUT_ERROR, EXIT_FAILURE);
+			ft_exit(NULL, PHILO_INPUT_ERROR, EXIT_FAILURE);
 		if (i != 1 && tmp == -1)
-			ft_error(PHILO_INPUT_ERROR, EXIT_FAILURE);
+			ft_exit(NULL, PHILO_INPUT_ERROR, EXIT_FAILURE);
+		i++;
 	}
 }
 
@@ -39,5 +40,10 @@ int	main(int argc, char **argv)
 	global = NULL;
 	ft_checker(argc, argv);
 	global = ft_init_global(argc, argv);
-	ft_print_global(global);
+	if (global->nb_philo == 1)
+	{
+		ft_alone(global);
+		ft_alone_stop(global);
+	}
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 20:54:35 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 21:49:40 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void	ft_alone(t_global *global)
 void	ft_alone_stop(t_global *global)
 {
 	pthread_join(global->philos[0]->thread, NULL);
-	ft_clean_mutex(global);
 	ft_clean_global(global);
 }

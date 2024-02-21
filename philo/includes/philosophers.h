@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:38 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 21:49:11 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void				ft_action_sleep(time_t time);
 // -- Cleaner
 void				ft_exit(t_global *global, char *msg, int status);
 void				*ft_clean_global(t_global *global);
-void				ft_clean_mutex(t_global *global);
 
 // -- Init
 t_global			*ft_init_global(int argc, char **argv);
