@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 18:18:20 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 18:25:20 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ typedef struct s_global
 	int				max_meal_count;
 	int				philo_dead;
 	int				*forks;
-	phtread_mutex_t	dead_mutex;
-	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	*forks_mutex;
+	pthread_mutex_t	dead_mutex;
+	pthread_mutex_t	write_mutex;
 	t_philo			**philos;
 }					t_global;
 

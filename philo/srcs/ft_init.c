@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/16 13:54:39 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 18:32:02 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,68 +18,70 @@
  * @param t_global *global - Pointer to the global struct.
  * @return void
  */
-static pthread_mutex_t	*ft_init_forks(t_global *global)
+static void	ft_init_forks(t_global *global)
 {
-	pthread_mutex_t	*forks;
-	int				i;
+	int	i;
 
-	forks = malloc(sizeof(pthread_mutex_t) * global->n_philo);
-	if (!forks)
+	global->forks = malloc(sizeof(int) * global->nb_philo);
+	if (!global->forks)
 		ft_exit(PHILO_MALLOC_ERROR, EXIT_FAILURE);
+	global->forks_mutex = malloc(sizeof(pthread_mutex_t) * global->nb_philo);
+	if (!global->forks_mutex)
+		ft_exit(PHILO_MUTEX_ERROR, EXIT_FAILURE);
 	i = 0;
-	while (i < global->n_philo)
+	while (i < global->nb_philo)
 	{
-		if (pthread_mutex_init(&forks[i], NULL))
+		global->forks[i] = 1;
+		if (pthread_mutex_init(&global->forks_mutex[i], NULL))
 			ft_exit(PHILO_MUTEX_ERROR, EXIT_FAILURE);
 		i++;
 	}
-	return (forks);
 }
 
 /**
- * @brief Initialize forks to philosophers
+ * @brief Initialize mutex
  *
- * @param t_philo *philos - Pointer to the philos struct.
+ * @param t_global *global - Pointer to the global struct.
  * @return void
  */
-static void	ft_give_forks(t_philo *philo)
+static void	ft_init_mutex(t_global *global)
 {
-	philo->fork[0] = philo->id;
-	philo->fork[1] = (philo->id + 1) % philo->global->n_philo;
-	if (philo->id % 2)
-	{
-		philo->fork[0] = (philo->id + 1) % philo->global->n_philo;
-		philo->fork[1] = philo->id;
-	}
+	if (pthread_mutex_init(&global->dead_mutex, NULL))
+		ft_exit(PHILO_MUTEX_ERROR, EXIT_FAILURE);
+	if (pthread_mutex_init(&global->write_mutex, NULL))
+		ft_exit(PHILO_MUTEX_ERROR, EXIT_FAILURE);
 }
 
 /**
  * @brief Initialize philos struct.
  *
- * @param global t_global - Pointer to the global struct.
- * @return t_philo **
+ * @param t_global *global - Pointer to the global struct.
+ * @return void
  */
-static t_philo	**ft_init_philos(t_global *global)
+static void	ft_init_philos(t_global *global)
 {
-	t_philo	**philos;
-	int		i;
+	unsigned int	i;
 
-	philos = malloc(sizeof(t_philo *) * global->n_philo);
-	if (!philos)
-		ft_exit("An error occured, philos malloc failed.", EXIT_FAILURE);
 	i = 0;
-	while (i < global->n_philo)
+	global->philos = malloc(sizeof(t_philo *) * global->nb_philo);
+	if (!global->philos)
+		ft_exit(PHILO_MALLOC_ERROR, EXIT_FAILURE);
+	while (i < global->nb_philo)
 	{
-		philos[i] = malloc(sizeof(t_philo));
-		if (!philos[i])
-			ft_exit("An error occured, philo malloc failed.", EXIT_FAILURE);
-		philos[i]->id = i;
-		philos[i]->t_ate = 0;
-		philos[i]->global = global;
-		ft_give_forks(philos[i]);
+		global->philos[i] = malloc(sizeof(t_philo));
+		if (!global->philos[i])
+			ft_exit(PHILO_MALLOC_ERROR, EXIT_FAILURE);
+		global->philos[i]->id = i;
+		global->philos[i]->meal = 0;
+		global->philos[i]->meal_count = 0;
+		global->philos[i]->t_last_meal = 0;
+		global->philos[i]->left_fork = i;
+		global->philos[i]->right_fork = (i + 1) % global->nb_philo;
+		global->philos[i]->global = global;
+		if (pthread_mutex_init(&global->philos[i]->meal_mutex, NULL))
+			ft_exit(PHILO_MUTEX_ERROR, EXIT_FAILURE);
 		i++;
 	}
-	return (philos);
 }
 
 /**
@@ -97,21 +99,21 @@ t_global	*ft_init_global(int argc, char **argv)
 
 	global = malloc(sizeof(t_global));
 	if (!global)
-		ft_exit("An error occured, global malloc failed.", EXIT_FAILURE);
+		ft_exit(PHILO_INPUT_ERROR, EXIT_FAILURE);
 	i = 1;
-	global->n_philo = ft_atoi(argv[i++]);
+	global->nb_philo = ft_atoi(argv[i++]);
 	global->tt_die = ft_atoi(argv[i++]);
 	global->tt_eat = ft_atoi(argv[i++]);
 	global->tt_sleep = ft_atoi(argv[i++]);
 	if (argc == 6)
-		global->n_must_eat = ft_atoi(argv[i]);
+		global->max_meal_count = ft_atoi(argv[i]);
 	else
-		global->n_must_eat = -1;
-	global->philos = ft_init_philos(global);
+		global->max_meal_count = -1;
+	global->philo_dead = 0;
+	ft_init_forks(global);
+	ft_init_mutex(global);
+	ft_init_philos(global);
 	if (!global->philos)
-		return (NULL);
-	global->forks_locked = ft_init_forks(global);
-	if (!global->forks_locked)
 		return (NULL);
 	return (global);
 }
