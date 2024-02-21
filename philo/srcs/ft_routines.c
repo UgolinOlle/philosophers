@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 20:52:47 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/21 20:54:35 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_alone(t_global *global)
 	global->t_start = ft_get_time();
 	pthread_create(&global->philos[0]->thread, NULL, &ft_alone_routine,
 		global->philos[0]);
-	return (1);
 }
 
 /**
