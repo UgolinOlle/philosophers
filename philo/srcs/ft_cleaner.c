@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:18 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 21:49:06 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/22 17:35:37 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	*ft_clean_global(t_global *global)
 	while (i < global->nb_philo)
 	{
 		pthread_mutex_destroy(&global->forks_mutex[i]);
-		pthread_mutex_destroy(&global->philos[i]->meal_mutex);
+		pthread_mutex_destroy(&global->philo[i].meal_mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&global->dead_mutex);
 	pthread_mutex_destroy(&global->write_mutex);
 	free(global->forks);
 	free(global->forks_mutex);
-	free(global->philos);
+	free(global->philo);
 	free(global);
 	return (NULL);
 }

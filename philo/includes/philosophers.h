@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 21:49:11 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/22 17:31:46 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_global
 	pthread_mutex_t	*forks_mutex;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	write_mutex;
-	t_philo			**philos;
+	t_philo			*philo;
 }					t_global;
 
 // -- Actions

@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 21:49:40 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/22 17:36:02 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	*ft_alone_routine(void *arg)
 void	ft_alone(t_global *global)
 {
 	global->t_start = ft_get_time();
-	pthread_create(&global->philos[0]->thread, NULL, &ft_alone_routine,
-		global->philos[0]);
+	pthread_create(&global->philo[0].thread, NULL, &ft_alone_routine,
+		&global->philo[0]);
 }
 
 /**
@@ -49,6 +49,6 @@ void	ft_alone(t_global *global)
  */
 void	ft_alone_stop(t_global *global)
 {
-	pthread_join(global->philos[0]->thread, NULL);
+	pthread_join(global->philo[0].thread, NULL);
 	ft_clean_global(global);
 }
