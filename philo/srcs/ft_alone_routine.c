@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 00:18:23 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 00:18:30 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 00:25:42 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	*ft_alone_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	ft_action_sleep(philo->global->tt_die);
+	ft_action_sleep(philo);
 	ft_status(philo, "died");
 	return (NULL);
 }
