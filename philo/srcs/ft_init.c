@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/22 17:35:16 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/24 16:41:39 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	ft_init_mutex(t_global *global)
 		ft_exit(global, PHILO_MUTEX_ERROR, EXIT_FAILURE);
 	if (pthread_mutex_init(&global->write_mutex, NULL))
 		ft_exit(global, PHILO_MUTEX_ERROR, EXIT_FAILURE);
+	if (pthread_mutex_init(&global->monitor, NULL))
+		ft_exit(global, PHILO_MUTEX_ERROR, EXIT_FAILURE);
 }
 
 /**
@@ -72,6 +74,7 @@ static void	ft_init_philo(t_global *global)
 		global->philo[i].meal = 0;
 		global->philo[i].meal_count = 0;
 		global->philo[i].t_last_meal = 0;
+		global->philo[i].dead = 0;
 		global->philo[i].left_fork = i;
 		global->philo[i].right_fork = (i + 1) % global->nb_philo;
 		global->philo[i].global = global;
