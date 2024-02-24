@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:06:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/24 23:48:41 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 00:24:10 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,13 @@ static void	ft_action_drop_forks(t_philo *philo)
 /**
  * @brief Philosopher sleep.
  *
- * @param time_t time - Time to sleep.
+ * @param t_philo *philo - Philosopher structure.
  * @return void
  */
-void	ft_action_sleep(time_t time)
+void	ft_action_sleep(t_philo *philo)
 {
-	time_t	start;
-
-	start = ft_get_time();
-	while (ft_get_time() - start < time)
-		usleep(100);
+	ft_status(philo, "is sleeping.");
+	usleep(philo->global->tt_sleep * 1000);
 }
 
 /**
