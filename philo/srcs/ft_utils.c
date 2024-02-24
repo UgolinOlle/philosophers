@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/21 21:33:54 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/24 22:28:45 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,22 @@ void	ft_status(t_philo *philo, char *status)
 	printf("%ldms %d %s\n", ft_get_time() - philo->global->t_start, philo->id
 		+ 1, status);
 	pthread_mutex_unlock(&philo->global->write_mutex);
+}
+
+/**
+ * @brief Check if the philosopher is dead.
+ *
+ * @param philo t_philo * - Philosopher structure.
+ * @return int
+ */
+int	ft_is_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->global->dead_mutex);
+	if (philo->dead == 1)
+	{
+		pthread_mutex_unlock(&philo->global->dead_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->global->dead_mutex);
+	return (0);
 }

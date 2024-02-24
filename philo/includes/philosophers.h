@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/24 16:40:54 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/24 22:29:04 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,20 @@ void				*ft_clean_global(t_global *global);
 // -- Init
 t_global			*ft_init_global(int argc, char **argv);
 
+// -- Monitor
+void				*ft_monitor(void *arg);
+
 // -- Rountines
 void				ft_alone(t_global *global);
 void				ft_alone_stop(t_global *global);
+void				ft_launch_routine(t_global *global);
+void				*ft_routine(void *arg);
 
 // -- Utils
 int					ft_is_digit(char *c);
 int					ft_atoi(const char *str);
 time_t				ft_get_time(void);
 void				ft_status(t_philo *philo, char *status);
+int					ft_is_dead(t_philo *philo);
 
 #endif
