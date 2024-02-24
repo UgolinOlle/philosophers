@@ -6,52 +6,11 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/24 23:59:24 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 00:21:03 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
-
-/**
- * @brief Routine for one philosopher.
- *
- * @param void *arg - Philosopher structure.
- * @return void
- */
-static void	*ft_alone_routine(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	ft_action_sleep(philo->global->tt_die);
-	ft_status(philo, "died");
-	return (NULL);
-}
-
-/**
- * @brief Routine for one philosopher.
- *
- * @param t_global *global - Global structure.
- * @return void
- */
-void	ft_alone(t_global *global)
-{
-	global->t_start = ft_get_time();
-	pthread_create(&global->philo[0].thread, NULL, &ft_alone_routine,
-		&global->philo[0]);
-}
-
-/**
- * @brief Stop routine for one philosopher.
- *
- * @param t_global *global - Global structure.
- * @return void
- */
-void	ft_alone_stop(t_global *global)
-{
-	pthread_join(global->philo[0].thread, NULL);
-	ft_clean_global(global);
-}
 
 /**
  * @brief Launch routine for philosophers.
@@ -75,6 +34,26 @@ void	ft_launch_routine(t_global *global)
 }
 
 /**
+ * @brief Stop routine for philosophers.
+ *
+ * @param t_global *global - Global structure.
+ * @return void
+ */
+void	ft_stop_routine(t_global *global)
+{
+	int	i;
+
+	i = 0;
+	while (i < global->nb_philo)
+	{
+		pthread_join(global->philo[i].thread, NULL);
+		i++;
+	}
+	pthread_join(global->monitor, NULL);
+	ft_clean_global(global);
+}
+
+/**
  * @brief Routine for philosophers.
  *
  * @param void *arg - Philosopher structure.
@@ -85,6 +64,8 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 != 0 && philo->meal_count == 0)
+		usleep(philo->global->tt_eat * 1000 + 1000);
 	while (1)
 	{
 		if (ft_is_dead(philo))

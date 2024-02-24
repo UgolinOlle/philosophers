@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/24 23:26:48 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 00:19:43 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ void				ft_action_sleep(time_t time);
 void				ft_action_eat(t_philo *philo);
 void				ft_action_think(t_philo *philo);
 
+// -- Alone routine
+void				ft_alone(t_global *global);
+void				ft_alone_stop(t_global *global);
+
 // -- Cleaner
 void				ft_exit(t_global *global, char *msg, int status);
 void				*ft_clean_global(t_global *global);
@@ -76,9 +80,8 @@ t_global			*ft_init_global(int argc, char **argv);
 void				*ft_monitor(void *arg);
 
 // -- Rountines
-void				ft_alone(t_global *global);
-void				ft_alone_stop(t_global *global);
 void				ft_launch_routine(t_global *global);
+void				ft_stop_routine(t_global *global);
 void				*ft_routine(void *arg);
 
 // -- Utils
