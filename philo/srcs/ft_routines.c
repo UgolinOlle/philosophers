@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 00:21:03 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 00:25:00 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	*ft_routine(void *arg)
 		pthread_mutex_unlock(&philo->global->forks_mutex[philo->right_fork]);
 		if (ft_is_dead(philo))
 			break ;
-		ft_action_sleep(philo->global->tt_sleep);
+		ft_action_sleep(philo);
 		ft_action_think(philo);
 	}
 	return (NULL);
