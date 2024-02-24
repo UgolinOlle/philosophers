@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/24 22:29:04 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/24 23:18:08 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_global
 
 // -- Actions
 void				ft_action_sleep(time_t time);
+void				ft_action_eat(t_philo *philo);
+void				ft_action_think(t_philo *philo);
 
 // -- Cleaner
 void				ft_exit(t_global *global, char *msg, int status);
