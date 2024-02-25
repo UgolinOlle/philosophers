@@ -6,7 +6,7 @@
 #    By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/28 23:23:14 by uolle             #+#    #+#              #
-#    Updated: 2024/02/25 10:54:47 by ugolin-olle      ###   ########.fr        #
+#    Updated: 2024/02/25 11:29:18 by ugolin-olle      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_FILES = $(wildcard $(SRCSDIR)/*.c)
 OBJ_FILES = $(patsubst $(SRCSDIR)/%.c,$(OBJDIR)/%.o,$(SRC_FILES))
 
 CC = cc
-C_FLAGS = -Werror -Wall -Wextra -fsanitize=address
+C_FLAGS = -Werror -Wall -Wextra
 HDR_FLAG = includes/philosophers.h
 INC_FLAGS = -I $(HDRDIR)
 
