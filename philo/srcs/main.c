@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:37:38 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/24 22:25:32 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:09:20 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int	main(int argc, char **argv)
 		ft_alone_stop(global);
 	}
 	else
+	{
 		ft_launch_routine(global);
+		ft_stop_routine(global);
+	}
 	return (EXIT_SUCCESS);
 }
