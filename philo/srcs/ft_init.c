@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/25 10:50:05 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:03:21 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	ft_init_philo(t_global *global)
 		global->philo[i].id = i;
 		global->philo[i].meal = 0;
 		global->philo[i].meal_count = 0;
-		global->philo[i].t_last_meal = 0;
+		global->philo[i].t_last_meal = global->t_start;
 		global->philo[i].dead = 0;
 		global->philo[i].left_fork = i;
 		global->philo[i].right_fork = (i + 1) % global->nb_philo;
