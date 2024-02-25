@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 11:26:54 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:57:51 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	time_t			t_last_meal;
 	unsigned int	left_fork;
 	unsigned int	right_fork;
+	int				fork_have;
 	pthread_mutex_t	meal_mutex;
 	struct s_global	*global;
 }					t_philo;
@@ -51,6 +52,7 @@ typedef struct s_global
 	time_t			tt_sleep;
 	int				max_meal_count;
 	int				philo_dead;
+	int				philo_full;
 	int				*forks;
 	pthread_mutex_t	*forks_mutex;
 	pthread_mutex_t	dead_mutex;

@@ -6,11 +6,30 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 11:25:25 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:55:44 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+/**
+ * @brief Check if philosopher is full.
+ *
+ * @param t_philo *philo - Philosopher structure.
+ * @return int
+ */
+static int	ft_is_full(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->meal_mutex);
+	if (philo->global->max_meal_count != -1
+		&& philo->meal_count >= philo->global->max_meal_count)
+	{
+		pthread_mutex_unlock(&philo->meal_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->meal_mutex);
+	return (0);
+}
 
 /**
  * @brief Launch routine for philosophers.
@@ -76,6 +95,8 @@ void	*ft_routine(void *arg)
 		ft_action_eat(philo);
 		pthread_mutex_unlock(&philo->global->forks_mutex[philo->left_fork]);
 		pthread_mutex_unlock(&philo->global->forks_mutex[philo->right_fork]);
+		if (ft_is_full(philo))
+			break ;
 		if (ft_is_dead(philo))
 			break ;
 		ft_action_sleep(philo);

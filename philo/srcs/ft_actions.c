@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:06:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 00:24:10 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:35:28 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	ft_action_forks(t_philo *philo)
 		ft_status(philo, "has taken left fork.");
 		philo->global->forks[philo->right_fork] = 0;
 		ft_status(philo, "as taken right fork.");
+		philo->fork_have = 1;
 	}
 }
 
@@ -39,9 +40,15 @@ static void	ft_action_forks(t_philo *philo)
 static void	ft_action_drop_forks(t_philo *philo)
 {
 	if (philo->global->forks[philo->left_fork] == 0)
+	{
 		philo->global->forks[philo->left_fork] = 1;
+		philo->fork_have = -1;
+	}
 	else if (philo->global->forks[philo->right_fork] == 0)
+	{
 		philo->global->forks[philo->right_fork] = 1;
+		philo->fork_have = -1;
+	}
 }
 
 /**
@@ -65,8 +72,7 @@ void	ft_action_sleep(t_philo *philo)
 void	ft_action_eat(t_philo *philo)
 {
 	ft_action_forks(philo);
-	if (philo->global->forks[philo->left_fork] == 0
-		&& philo->global->forks[philo->right_fork] == 0)
+	if (philo->fork_have == 1)
 	{
 		pthread_mutex_lock(&philo->meal_mutex);
 		philo->t_last_meal = ft_get_time();

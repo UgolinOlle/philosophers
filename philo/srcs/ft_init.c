@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/25 11:27:55 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:58:07 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void	ft_init_philo(t_global *global)
 		global->philo[i].t_last_meal = global->t_start;
 		global->philo[i].left_fork = i;
 		global->philo[i].right_fork = (i + 1) % global->nb_philo;
+		global->philo[i].fork_have = 0;
 		global->philo[i].global = global;
 		if (pthread_mutex_init(&global->philo[i].meal_mutex, NULL) != 0)
 			ft_exit(global, PHILO_MUTEX_ERROR, EXIT_FAILURE);
@@ -107,6 +108,7 @@ t_global	*ft_init_global(int argc, char **argv)
 	else
 		global->max_meal_count = -1;
 	global->philo_dead = 0;
+	global->philo_full = 0;
 	global->t_start = ft_get_time();
 	ft_init_forks(global);
 	ft_init_mutex(global);
