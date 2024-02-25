@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 11:55:44 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 13:01:30 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,16 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0 && philo->meal_count == 0)
-		usleep(philo->global->tt_eat * 1000 + 100);
+		usleep(philo->global->tt_eat * 1000 + 50);
 	while (1)
 	{
 		if (ft_is_dead(philo))
 			break ;
-		pthread_mutex_lock(&philo->global->forks_mutex[philo->left_fork]);
-		pthread_mutex_lock(&philo->global->forks_mutex[philo->right_fork]);
+		ft_lock_forks(philo);
 		if (ft_is_dead(philo))
 			break ;
 		ft_action_eat(philo);
-		pthread_mutex_unlock(&philo->global->forks_mutex[philo->left_fork]);
-		pthread_mutex_unlock(&philo->global->forks_mutex[philo->right_fork]);
+		ft_unlock_forks(philo);
 		if (ft_is_full(philo))
 			break ;
 		if (ft_is_dead(philo))
