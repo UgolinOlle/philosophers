@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:53:08 by uolle             #+#    #+#             */
-/*   Updated: 2024/02/24 23:27:50 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 10:50:05 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ t_global	*ft_init_global(int argc, char **argv)
 	else
 		global->max_meal_count = -1;
 	global->philo_dead = 0;
+	global->t_start = ft_get_time();
 	ft_init_forks(global);
 	ft_init_mutex(global);
 	ft_init_philo(global);
