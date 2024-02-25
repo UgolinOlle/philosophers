@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:20:47 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/24 22:28:45 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:27:46 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_status(t_philo *philo, char *status)
 int	ft_is_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->global->dead_mutex);
-	if (philo->dead == 1)
+	if (philo->global->philo_dead == 1)
 	{
 		pthread_mutex_unlock(&philo->global->dead_mutex);
 		return (1);

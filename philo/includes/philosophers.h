@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 00:24:25 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:26:54 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_philo
 	int				meal;
 	int				meal_count;
 	time_t			t_last_meal;
-	int				dead;
 	unsigned int	left_fork;
 	unsigned int	right_fork;
 	pthread_mutex_t	meal_mutex;

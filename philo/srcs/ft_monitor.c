@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:40:09 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 00:03:45 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/25 11:27:22 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_monitor_check_death(t_global *global, int i)
 	if (ft_get_time() - global->philo[i].t_last_meal >= global->tt_die)
 	{
 		pthread_mutex_lock(&global->philo[i].global->dead_mutex);
-		global->philo[i].dead = 1;
+		global->philo_dead = 1;
 		pthread_mutex_unlock(&global->philo[i].global->dead_mutex);
 		pthread_mutex_unlock(&global->philo[i].meal_mutex);
 		ft_status(&global->philo[i], "died");
@@ -44,13 +44,13 @@ void	*ft_monitor(void *arg)
 	int			i;
 
 	global = (t_global *)arg;
-	while (global->philo->dead != 1)
+	while (global->philo_dead != 1)
 	{
 		i = 0;
 		while (i < global->nb_philo)
 		{
 			ft_monitor_check_death(global, i);
-			if (global->philo[i].dead == 1)
+			if (global->philo_dead == 1)
 				return (NULL);
 			pthread_mutex_unlock(&global->philo[i].meal_mutex);
 			i++;
