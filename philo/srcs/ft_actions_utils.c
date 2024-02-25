@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_actions.c                                       :+:      :+:    :+:   */
+/*   ft_actions_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 19:06:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/25 12:58:08 by ugolin-olle      ###   ########.fr       */
+/*   Created: 2024/02/25 12:58:58 by ugolin-olle       #+#    #+#             */
+/*   Updated: 2024/02/25 13:00:00 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
 /**
- * @brief Philosopher sleep.
+ * @brief Lock forks.
  *
  * @param t_philo *philo - Philosopher structure.
  * @return void
- */
-void	ft_action_sleep(t_philo *philo)
+*/
+void	ft_lock_forks(t_philo *philo)
 {
-	ft_status(philo, "is sleeping.");
-	usleep(philo->global->tt_sleep * 1000);
+    pthread_mutex_lock(&philo->global->forks_mutex[philo->left_fork]);
+    pthread_mutex_lock(&philo->global->forks_mutex[philo->right_fork]);
 }
 
 /**
- * @brief Action think.
+ * @brief Unlock forks.
  *
  * @param t_philo *philo - Philosopher structure.
  * @return void
- */
-void	ft_action_think(t_philo *philo)
+*/
+void	ft_unlock_forks(t_philo *philo)
 {
-	ft_status(philo, "is thinking.");
+    pthread_mutex_unlock(&philo->global->forks_mutex[philo->left_fork]);
+    pthread_mutex_unlock(&philo->global->forks_mutex[philo->right_fork]);
 }
