@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:57:46 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/28 13:35:04 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/28 16:36:52 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ void	ft_action_eat(t_philo *philo)
 		usleep(philo->global->tt_eat * 1000);
 		ft_action_drop_forks(philo);
 	}
+	else
+		ft_action_drop_forks(philo);
 }
