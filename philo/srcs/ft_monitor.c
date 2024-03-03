@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:40:09 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/28 13:35:38 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/03/03 23:00:09 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
  */
 static void	ft_monitor_check_death(t_global *global, int i)
 {
+	time_t	current;
+
 	pthread_mutex_lock(&global->philo[i].meal_mutex);
-	if (ft_get_time() > (global->philo[i].t_last_meal + global->tt_die))
+	current = ft_get_time();
+	if (current > (global->philo[i].t_last_meal + global->tt_die))
 	{
 		pthread_mutex_lock(&global->dead_mutex);
 		global->philo_dead = 1;
@@ -30,6 +33,8 @@ static void	ft_monitor_check_death(t_global *global, int i)
 		pthread_mutex_unlock(&global->philo[i].meal_mutex);
 		ft_status(&global->philo[i], "died");
 	}
+	else
+		pthread_mutex_unlock(&global->philo[i].meal_mutex);
 }
 
 /**
@@ -70,7 +75,7 @@ void	*ft_monitor(void *arg)
 			pthread_mutex_unlock(&global->philo[i].meal_mutex);
 			i++;
 			if (global->philo_full >= global->nb_philo)
-				break ;
+				return (NULL);
 			usleep(1000);
 		}
 		if (global->philo_full >= global->nb_philo)

@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/28 11:43:14 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/03/03 23:01:07 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 static int	ft_is_full(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->meal_mutex);
-	if (philo->meal_count >= philo->global->max_meal_count)
+	if (philo->meal_count >= philo->global->max_meal_count
+		&& philo->global->max_meal_count > 0)
 	{
 		pthread_mutex_unlock(&philo->meal_mutex);
 		return (1);
@@ -81,7 +82,8 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 != 0 && philo->meal_count == 0)
+	if (philo->id % 2 != 0 && philo->meal_count == 0
+		&& philo->global->max_meal_count > 0)
 		usleep(philo->global->tt_eat * 1000 + 100);
 	while (1)
 	{
