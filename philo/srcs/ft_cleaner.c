@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:18 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/22 17:35:37 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/02/28 16:37:39 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_exit(t_global *global, char *msg, int status)
  * @param t_global *global - Global structure.
  * @return void
  */
-void	*ft_clean_global(t_global *global)
+void	ft_clean_global(t_global *global)
 {
 	int	i;
 
@@ -45,11 +45,10 @@ void	*ft_clean_global(t_global *global)
 		pthread_mutex_destroy(&global->philo[i].meal_mutex);
 		i++;
 	}
-	pthread_mutex_destroy(&global->dead_mutex);
 	pthread_mutex_destroy(&global->write_mutex);
+	pthread_mutex_destroy(&global->dead_mutex);
 	free(global->forks);
 	free(global->forks_mutex);
 	free(global->philo);
 	free(global);
-	return (NULL);
 }
