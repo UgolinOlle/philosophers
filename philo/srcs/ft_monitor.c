@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:40:09 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/03/03 23:00:09 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/03/04 16:08:23 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	ft_monitor_check_death(t_global *global, int i)
 		pthread_mutex_lock(&global->dead_mutex);
 		global->philo_dead = 1;
 		pthread_mutex_unlock(&global->dead_mutex);
-		pthread_mutex_unlock(&global->philo[i].meal_mutex);
 		ft_status(&global->philo[i], "died");
 	}
 	else
@@ -49,6 +48,22 @@ static void	ft_monitor_check_full(t_global *global, int i)
 	if (global->max_meal_count != -1
 		&& global->philo[i].meal_count == global->max_meal_count)
 		global->philo_full++;
+}
+
+/**
+ * @brief Check if all philo are full by number of philos
+ *
+ * @param t_global *global - Global structure.
+ * @return int - 1 if all philo are full, 0 if not.
+ */
+static int	ft_monitor_check_health(t_global *global)
+{
+	if (global->philo_full >= global->nb_philo)
+	{
+		usleep(1000);
+		return (1);
+	}
+	return (0);
 }
 
 /**
@@ -72,15 +87,12 @@ void	*ft_monitor(void *arg)
 			if (global->philo_dead == 1)
 				return (NULL);
 			ft_monitor_check_full(global, i);
-			pthread_mutex_unlock(&global->philo[i].meal_mutex);
 			i++;
-			if (global->philo_full >= global->nb_philo)
+			if (ft_monitor_check_health(global) == 1)
 				return (NULL);
-			usleep(1000);
 		}
-		if (global->philo_full >= global->nb_philo)
-			break ;
-		usleep(1000);
+		if (ft_monitor_check_health(global) == 1)
+			return (NULL);
 	}
 	return (NULL);
 }

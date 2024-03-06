@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:54:54 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/03/03 23:01:07 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/03/04 12:46:09 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,8 @@ void	*ft_routine(void *arg)
 		if (ft_is_dead(philo))
 			break ;
 		ft_lock_forks(philo);
-		if (ft_is_dead(philo))
-			break ;
 		ft_action_eat(philo);
+		ft_action_drop_forks(philo);
 		ft_unlock_forks(philo);
 		if (ft_is_full(philo))
 			break ;

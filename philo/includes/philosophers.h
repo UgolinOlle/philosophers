@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:24:58 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/28 16:36:30 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/03/04 12:42:41 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 // -- Defines
-# define PHILO_USAGE "Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]"
+# define PHILO_USAGE "Usage: ./philo nb_philo tt_die tt_eat tt_sleep meal_count"
 # define PHILO_INPUT_ERROR "Invalid input"
 # define PHILO_MALLOC_ERROR "An error occured, malloc failed."
 # define PHILO_MUTEX_ERROR "An error occured, mutex init failed."
@@ -62,6 +62,7 @@ typedef struct s_global
 }					t_global;
 
 // -- Actions eat
+void				ft_action_drop_forks(t_philo *philo);
 void				ft_action_eat(t_philo *philo);
 
 // -- Actions utils

@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:57:46 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2024/02/28 16:36:52 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2024/03/04 12:43:26 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
  */
 static void	ft_action_forks(t_philo *philo)
 {
+	if (ft_is_dead(philo) == 1)
+		return ;
 	if (philo->global->forks[philo->left_fork] == 1
 		&& philo->global->forks[philo->right_fork] == 1)
 	{
@@ -37,7 +39,7 @@ static void	ft_action_forks(t_philo *philo)
  * @param t_philo *philo - Philosopher structure.
  * @return void
  */
-static void	ft_action_drop_forks(t_philo *philo)
+void	ft_action_drop_forks(t_philo *philo)
 {
 	if (philo->global->forks[philo->left_fork] == 0)
 	{
@@ -60,6 +62,8 @@ static void	ft_action_drop_forks(t_philo *philo)
 void	ft_action_eat(t_philo *philo)
 {
 	ft_action_forks(philo);
+	if (ft_is_dead(philo) == 1)
+		return ;
 	if (philo->fork_have == 1)
 	{
 		pthread_mutex_lock(&philo->meal_mutex);
@@ -69,8 +73,5 @@ void	ft_action_eat(t_philo *philo)
 		pthread_mutex_unlock(&philo->meal_mutex);
 		ft_status(philo, "is eating.");
 		usleep(philo->global->tt_eat * 1000);
-		ft_action_drop_forks(philo);
 	}
-	else
-		ft_action_drop_forks(philo);
 }
