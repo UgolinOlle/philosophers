@@ -1,7 +1,7 @@
 # Philosophers
 
 <p align="center">
-    <img src="https://github.com/mcombeau/mcombeau/blob/main/42_badges/philosophersen.png" alt="Philosophers 42 project badge">
+    <img src="https://github.com/mcombeau/mcombeau/blob/main/42_badges/philosophersn.png" alt="Philosophers 42 project badge">
 </p>
 
 [![42 School Project](https://img.shields.io/badge/42%20Project-Philosophers-blue)](https://github.com/your-username/philosophers)
